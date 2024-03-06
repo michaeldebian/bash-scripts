@@ -33,7 +33,7 @@ change_web_server_name() {
 }
 
 # Main script
-echo "Environment Configuration Script"
+echo "Please select which server would you like to configure"
 
 # Print available web servers
 print_web_servers
