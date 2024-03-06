@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 # Check if firewalld is running
 if systemctl is-active --quiet firewalld; then
@@ -26,3 +26,6 @@ server_ip=$(ip a | awk '/inet /{print $2}' | grep -v '127.0.0.1' | cut -d'/' -f1
 
 # Prompt user to check a specific URL
 echo "Please open your browser and go to: http://$server_ip:8080 to verify the changes."
+
+# Prompt user to press Enter to continue
+read -p "Press Enter to continue..."
