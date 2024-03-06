@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-#!/bin/bash
-
 # Check if firewalld is running
 if systemctl is-active --quiet firewalld; then
     echo "firewalld is running."
