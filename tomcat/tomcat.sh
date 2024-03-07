@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Define variables
+SERVICE_NAME="tomcat9"
 DIR="/path/to/directory"
 TOMCAT="apache-tomcat.tar.gz"
 TOMCAT_DIR="/etc/init.d"
@@ -53,6 +54,15 @@ while grep -q "jsvc64" /var/log/messages; do
     audit2allow -M jsvc{01}pol -i /var/log/messages
     semodule -i jsvc{01}.pp
     ((counter++))
+done
+
+while true; do
+# Check if the service is running
+if systemctl is-active --quiet "$SERVICE_NAME"; then
+    echo "$SERVICE_NAME is running."
+else
+    echo "$SERVICE_NAME is not running."
+fi
 done
 
 # Check if port 8080 is running
