@@ -56,14 +56,14 @@ while grep -q "jsvc64" /var/log/messages; do
     ((counter++))
 done
 
-while true; do
+
 # Check if the service is running
-if systemctl is-active --quiet "$SERVICE_NAME"; then
-    echo "$SERVICE_NAME is running."
-else
-    echo "$SERVICE_NAME is not running."
-fi
+while ! systemctl is-active --quiet "$SERVICE_NAME"; do
+    echo "$SERVICE_NAME is not running. Waiting..."
+    sleep 1  # Adjust the sleep duration as needed
 done
+
+echo "$SERVICE_NAME is running."
 
 # Check if port 8080 is running
 if netstat -vant | grep -q "8080"; then
