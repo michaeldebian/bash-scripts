@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-file="list.txt"
+file="requirements.txt"
 line_number=1
 
 # Check if the file exists
@@ -15,22 +15,24 @@ num_lines=$(wc -l < "$file")
 # Calculate the number of lines per column
 lines_per_column=$(( (num_lines + 1) / 2 ))
 
-# Initialize column counter
-column=1
+# Get the number of columns in the terminal
+num_columns=$(tput cols)
 
-# Loop through the file and list items in two columns
+# Calculate padding for centering the output
+padding=$(( (num_columns - 4) / 2 ))
+
+# Loop through the file and list items with numbers
 while IFS= read -r item; do
-    if [ "$column" -eq 1 ]; then
-        printf "%-5s %-25s" "$line_number)" "$item"
-        column=2
-    else
-        printf "%-5s %-25s\n" "$line_number)" "$item"
-        column=1
-        ((line_number++))
+    # Calculate padding for centering the item
+    item_padding=$(( padding - ${#item} ))
+    
+    # Print the item with padding for centering
+    printf "%*s %s" "$item_padding" "" "$line_number) $item"
+    
+    # Check if we need to move to the next column
+    if (( line_number == lines_per_column )); then
+        echo
     fi
+    
+    ((line_number++))
 done < "$file"
-
-# If the number of lines is odd, add a newline at the end
-if [ $((num_lines % 2)) -eq 1 ]; then
-    echo ""
-fi
