@@ -1,14 +1,12 @@
 #!/usr/bin/env bash
 
-# Assign values to RHEL_VERSION and MSSQL_VERSION (replace these with actual values)
-RHEL_VERSION=8
-MSSQL_VERSION=2019
+# Assuming variables.txt is the file where these variables are stored
+while [ "$RHEL_VERSION" != "correct" ] || [ "$MSSQL_VERSION" != "correct" ]; do
+    echo "Values not correct. Waiting for variables.txt to be corrected..."
+    sleep 3
 
-# Compare the versions
-if [ "$RHEL_VERSION" -eq "$MSSQL_VERSION" ]; then
-    echo "RHEL version $RHEL_VERSION is equal to MSSQL version $MSSQL_VERSION"
-elif [ "$RHEL_VERSION" -gt "$MSSQL_VERSION" ]; then
-    echo "RHEL version $RHEL_VERSION is greater than MSSQL version $MSSQL_VERSION"
-else
-    echo "RHEL version $RHEL_VERSION is less than MSSQL version $MSSQL_VERSION"
-fi
+    # Re-read the variables from variables.txt
+    source variables.txt
+done
+
+echo "Values corrected. Continuing with the script..."
