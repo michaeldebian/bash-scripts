@@ -14,3 +14,4 @@ while IFS= read -r item; do
     echo "$line_number) $item"
     ((line_number++))
 done < "$file"
+
