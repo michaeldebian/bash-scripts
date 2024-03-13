@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-git add .
+sudo git add .
 echo "Please enter the comment"
 read in
 git commit -m "$in"

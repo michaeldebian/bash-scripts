@@ -86,7 +86,7 @@ In the response file, we will update only the below values.
 NOTE – Here we have selected installation type as Administrator
 
 INVENTORY_LOCATION=/dmapps/product/oraInventory
-SELECTED_LANGUAGES=en
+SELECTED_LANGUAGES=en,ar
 ORACLE_HOME=/dmapps/product/release/oracle/oracle/product/12.1.0/client_1
 ORACLE_BASE=/dmapps/product/release
 oracle.install.client.installType=Administrator
@@ -98,3 +98,33 @@ If you wish you to customize the installation, then you can go through the respo
 4. Now do the installation silently.
 
 ./runInstaller -ignoreSysPrereqs -showProgress -silent -responseFile /software/client/response/client_install.rsp
+=================================================================================================================
+
+
+$ vi client_install.rsp
+"client_install.rsp" 107 lines, 5614 characters
+
+#-------------------------------------------------------------------------------
+# Unix group to be set for the inventory directory.
+#----------------------------
+UNIX_GROUP_NAME=oinstall
+#-------------------------------------------------------------------------------
+# Inventory location.
+#-------------------------------------------------------------------------------
+INVENTORY_LOCATION=/app01/oraInventory
+#-------------------------------------------------------------------------------
+# Complete path of the Oracle Home
+#-------------------------------------------------------------------------------
+ORACLE_HOME=/app01/Oracle/product/12.2.0/client_1
+
+#-------------------------------------------------------------------------------
+# Complete path of the Oracle Base.
+#-------------------------------------------------------------------------------
+ORACLE_BASE=/app01/Oracle
+
+#Example    : INSTALL_TYPE = Administrator
+#------------------------------------------------------------------------------
+oracle.install.client.installType=Administrator
+
+
+SELECTED_LANGUAGES=en,ar
