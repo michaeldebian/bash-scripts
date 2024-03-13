@@ -1,0 +1,100 @@
+https://dbaclass.com/article/install-oracle-client-silent-mode-using-response-file/
+
+
+HOME / DATABASE, HOW TO / HOW TO INSTALL ORACLE CLIENT IN SILENT MODE USING RESPONSE FILE
+How To Install Oracle Client In Silent Mode Using Response File
+17028 views 1 min , 39 sec read 5
+
+Though GUI is a preferable method to do client installation, But sometimes DBAs might be not to be able to xmanager to enable GUI for the server. In that case, installation using response file will be useful.
+
+In this example, we will do the installation of Oracle client 12.1.0.2 version.
+
+1. Download Oracle client software from oracle portal.-  
+
+
+
+Ezoic
+
+Microsoft SQL Server 2019 Express ...
+
+Pause
+
+Unmute
+Remaining Time -6:04
+
+1x
+Playback Rate
+
+Captions
+Fullscreen
+Now Playing
+Microsoft SQL Server 2019 Express Silent Install (How-To Guide)
+
+The Ultimate Guide to Silent Installs: Benefits, Preparation, Execution, Troubleshooting, and Best Practices for Beginners
+7:41
+
+VLC Media Player Silent Install (How-To Guide)
+7:07
+
+Adobe Reader DC Silent Install (How-To Guide)
+13:44
+
+English Conversation About Computer
+1:05
+
+TeamViewer Silent Install (How-To Guide)
+6:00
+
+Salesforce Apex to call OpenAI API with Prompt
+3:53
+
+How to Install MySQL 8.0.29 Server and Workbench on Windows 10 | Latest Version |
+11:52
+
+Install MySQL on Windows in 2 Minute - Command Line Client [35 mb]
+5:26
+
+Microsoft Power BI Desktop Silent Install (How-To Guide)
+5:21
+Play Video
+Microsoft SQL Server 2019 Express Silent Install (How-To Guide)
+ 
+
+2. Copy and unzip the software in the server
+
+ 
+
+unzip solaris.sparc64_12102_client.zip
+cd client
+-rwxr-xr-x 1 debmadm dmgrp 500 Feb 6 2013 welcome.html
+-rwxr-xr-x 1 debmadm dmgrp 16872 Jul 8 2014 runInstaller
+drwxr-xr-x 14 debmadm dmgrp 31 Dec 26 11:49 stage
+drwxr-xr-x 4 debmadm dmgrp 14 Dec 26 11:49 install
+drwxr-xr-x 2 debmadm dmgrp 4 Dec 26 16:05 response
+3. Update the response file.
+
+
+Ezoic
+a sample response file comes with the software itself. We just need the update the response file with required values.
+
+
+Ezoic
+RESPONSE FILE LOCATION – > $SOFTWARE/client/response/client_install.rsp
+
+In the response file, we will update only the below values.
+
+NOTE – Here we have selected installation type as Administrator
+
+INVENTORY_LOCATION=/dmapps/product/oraInventory
+SELECTED_LANGUAGES=en
+ORACLE_HOME=/dmapps/product/release/oracle/oracle/product/12.1.0/client_1
+ORACLE_BASE=/dmapps/product/release
+oracle.install.client.installType=Administrator
+
+The response file will look like this – >  client_install
+
+If you wish you to customize the installation, then you can go through the response file and update accordingly.
+
+4. Now do the installation silently.
+
+./runInstaller -ignoreSysPrereqs -showProgress -silent -responseFile /software/client/response/client_install.rsp
