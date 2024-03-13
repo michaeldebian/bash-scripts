@@ -1,18 +1,30 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 # Function to check command existence
 check_command_existence() {
     command="$1"
     if ! command -v "$command" &> /dev/null; then
         echo "Error: $command is not installed."
-        exit 1
+        return 1
     fi
 }
 
-# Check if required software is installed
-check_command_existence "wkhtmltopdf"
-check_command_existence "gs"
-check_command_existence "convert"
+# Function to check if all required software are installed
+check_all_installed() {
+    check_command_existence "wkhtmltopdf" &&
+    check_command_existence "gs" &&
+    check_command_existence "convert"
+}
+
+# Prompt user to install missing software and wait until installed
+while ! check_all_installed; do
+    echo "Please install the following software: wkhtmltopdf, Ghostscript, and ImageMagick."
+    read -p "Press Enter to continue after installing, or 'q' to quit: " choice
+    if [ "$choice" = "q" ]; then
+        echo "Exiting the script."
+        exit 1
+    fi
+done
 
 # Function to check command output
 check_command() {
